@@ -52,3 +52,35 @@ Arrow 함수는 => 문법을 사용하는 축약형 함수
     })
 ```
 
+3. 코드의 상위 스코프(lexical scope)를 가리키는 lexical thsi 지원
+일반 함수의 자신을 호출하는 객체를 가리키는 dynamic this와 달리 arrow 함수는 lexical this 가리킴
+
+arrow function
+```
+    var bob = {
+        _name: "Bob",
+        _friends: ["John, Brian"],
+        printFrieds() {
+            this._friends.forEach(f =>
+            console.log(this._name + " knows " + f));
+        }
+    }
+```
+
+default function
+```
+    this._friends.forEach(function (f) {
+        console.log(this._name +" knows " + f));
+    }.bind(this));
+```
+
+### Classes
+
+ES6 클래스는 포로토타입 기반 객체지향 패턴을 더 쉽게 사용할 수 있는 대체제
+클래스 패턴 생성을 더 쉽고 단순하게 생성할 수 있어서 사용하기도 편하고 상호운용성도 증가
+
+
+
+
+
+
