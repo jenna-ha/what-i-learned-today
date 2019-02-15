@@ -79,6 +79,62 @@ default function
 ES6 클래스는 포로토타입 기반 객체지향 패턴을 더 쉽게 사용할 수 있는 대체제
 클래스 패턴 생성을 더 쉽고 단순하게 생성할 수 있어서 사용하기도 편하고 상호운용성도 증가
 
+```
+    class SkinnedMesh extends THREE.Mesh {
+        constructor(geometry, materials) {
+            super(geometry, materials);
+
+            this.idMatrix = SkiinedMesh.defaultMatrix();
+            this.bones = [];
+            this.boneMatrices = [];
+            //...
+        }
+    
+
+        update(camera) {
+            //...
+            super.update();
+        }
+
+        get bonCount() {
+            return this.bones.length;
+        }
+
+        set matrixType(matrixType) {
+            this.idMatrix = SkinnedMesh[matrixType]();
+        }
+
+        static defaultMatrix() {
+            return new THREE.Matrix4();
+        }   
+    }
+```
+
+### Enhanced Object Literals
+
+ES6에서 객체 리터럴은 선언문에서 프로토타입 설정, foo: foo 선언을 위한 단축 표기법, 메서드 정의, super 클래스 호출 및 동적 속성명을 지원하도록 향상
+그에 따라 객체 리터럴 및 클래스 선언이 더 밀접되어져, 객체기반 설계가 편리해짐
+
+```
+    var obj = {
+        // __proto__
+        __proto__ : theProtoObj
+
+        // 'handler': handler의 단축 표기
+        handler,
+
+        // Methods
+        toString() {
+
+            // Super calls
+            return "d " + super.toString();
+        },
+
+
+        // Computed (dynamic) property name
+        [ 'prop_' _ (() => 42)() ]: 42
+    }
+```
 
 
 
