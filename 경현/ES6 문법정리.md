@@ -137,6 +137,32 @@ ES6에서 객체 리터럴은 선언문에서 프로토타입 설정, foo: foo �
 ```
 
 
+###  Template Strings
+
+Template Strings(ES6부터는 Template literals)는 문법적으로 더 편하게 string을 생성할 수 있게 함
+이는 Perl, Python 등의 문자열 보간(strign interpolation)과 유사합니다. Tagged template literals는 인젝션 공격 방어 혹은 문자열로부터 상위 데이터 구조체 재조립 등을 위해 string 생성을 커스터마이징 가능하게 해줌
+
+```
+    //Basic Literal String Creation
+    'In JavaScript '/n' is a line-feed'
+
+    // Multiline String
+    'In JavaScript this is
+     not legal'
+
+     //String interpolation
+     var name = "Bob", time = "today"
+     'Hello ${name}, how are you ${time}?'
+
+     //Construct on HTTP Request prefix is used to ineterpret the replacements and constructipn
+     POST'http://foo.org/bar?=a=${a}&b=${b}
+          Content-Type: application/json
+          X-Credentials: ${credentials}
+          {"foo": ${foo},
+           "bar": ${bar}}'(myOnReadyStateChnageHandler);
+```
+
+
 
 
 
