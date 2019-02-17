@@ -162,6 +162,141 @@ Template Strings(ES6부터는 Template literals)는 문법적으로 더 편하�
            "bar": ${bar}}'(myOnReadyStateChnageHandler);
 ```
 
+### Destructi
+
+Destructuring는 배열과 객체에 패턴 매칭을 통한 데이터 바인딩을 제공
+Destructuring는 할당 실패에 유연하며, 실패 시 undefined 값이 자동할당
+또한, 객체의 속성 값도 자동으로 검색하여 바인딩
+
+```
+    //list matching
+    var [a, , b] = [1,2,3];
+
+    //object matching
+    var { op: a, lhs: { op: b}, rhs: c}
+            = getASTNode()
+
+
+    //object match 단축 표기
+    //binds  'op', 'lhs' and 'rhs' in scope
+    var {op, hls, rhs} = getASTNode()
+
+    //parameter에서도 사용 가능
+    function g({name: x}) {
+        console.log(x);
+    }
+    g({name: 5})
+
+    // Fail-soft desctructuring with defaults
+    var [a = 1] = [];
+    a === 1;
+
+```
+
+### Default + Rest + Spread
+
+파라미터에 기본값 설정
+
+```
+    function f(x, y=12) {
+        return x + y;
+    }
+
+    f(3) //15
+```
+
+가변인자를 사용가능하며 배열로 치환
+
+```
+    function(x, ...y) {
+        // y is an Array ["hello", true]
+        return x * y.length;
+    }
+    
+    f(3, "hello", true) //6
+```
+
+함수 호출 시 배열을 일련의 인자로 나누어 주입
+
+```
+    function f(x, y, z) {
+        return x + y + z;
+    }
+
+    //Pass each elem of array as argument
+    f(...[1,2,3]) //6
+```
+
+### Let + Const
+
+블록 유효 범위를 갖는 새로운 변수 선언 방법 지원
+let은 var와 유사하게 동작, const는 재할당 및 재선언 불가능
+
+```
+    function f() {
+        {
+            let x;
+            {
+                const x = "sneaky";
+                
+                //error, const
+                x = "foo";               
+            }
+            // error, already declared in block
+            let x = "innner";
+        }
+    }
+```
+
+var의 유효 범위는 전체 외부 함수까지이지만, let은 변수를 선언한 블롤과 그 내부 블록에서 유효
+
+```
+    function varTest() {
+        var x = 31;
+        if (true) {
+            var x = 71; //same variable!
+            console.log(x); // 71
+        }
+
+        cosole.log(x) // 71
+    }
+
+    function letTest() {
+        let x = 31;
+        if(true) {
+            let x = 71; //different variable
+            console.log(x); // 71
+        }
+        console.log(x); // 31
+    }
+```
+
+```
+    function varTest() {
+        if (true) {
+            var x = 71;
+            console.log(x); // 71
+        }
+        console.log(x); //71
+    }
+
+    function varTest() {
+        let x = 71;
+        if (true) {
+            console.log(x); //71
+        }
+
+        console.log(x); //71
+    }
+
+    function varTest() {
+        if (true) {
+            let x = 71;
+            console.log(x); //71
+        }   
+        console.log(x); // Uncaught ReferenceError : x is not defined
+    }
+```
 
 
 
