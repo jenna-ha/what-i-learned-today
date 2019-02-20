@@ -1,0 +1,7 @@
+﻿install git
+
+clone repository
+
+create branch (branch name : yeji)
+
+add file
